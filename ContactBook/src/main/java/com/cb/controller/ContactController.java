@@ -16,42 +16,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cb.input.PhoneDtoInput;
-import com.cb.output.PhoneDtoOutput;
-import com.cb.service.PhoneService;
+import com.cb.input.ContactDtoInput;
+import com.cb.output.ContactDtoOutput;
+import com.cb.service.ContactService;
 
 @RestController
-@RequestMapping("/telefone")
-public class PhoneController {
+@RequestMapping("/contato")
+public class ContactController {
 
 	@Autowired
-	private PhoneService phoneService;
-
+	private ContactService contactService;
+	
 	@GetMapping(produces = "application/json")
-	public List<PhoneDtoOutput> get() {
-		return this.phoneService.getAll();
+	public List<ContactDtoOutput> get() {
+		return this.contactService.getALL();
 	}
-
+	
 	@GetMapping(path = "/{id}", produces = "application/json")
-	public PhoneDtoOutput get(@PathVariable Long id) {
-		return this.phoneService.get(id);
+	public ContactDtoOutput get(@PathVariable Long id) {
+		return this.contactService.get(id);
 	}
-
+	
 	@PostMapping(consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public PhoneDtoOutput post(@Valid @RequestBody PhoneDtoInput telefoneDtoInput) {
-		return this.phoneService.create(telefoneDtoInput);
+	public ContactDtoOutput post(@RequestBody ContactDtoInput contactDtoInput) {
+		return this.contactService.create(contactDtoInput);
 	}
-
+	
 	@PutMapping(path = "/{id}", consumes = "application/json", produces = "application/json")
-	public PhoneDtoOutput put(@Valid @RequestBody PhoneDtoInput telefoneDtoInput, @PathVariable Long id) {
-		return this.phoneService.update(telefoneDtoInput, id);
-	}
+		public ContactDtoOutput put(@Valid @RequestBody ContactDtoInput contactDtoInput, @PathVariable Long id) {
+			return this.contactService.update(contactDtoInput, id);
+		}
 
-	@DeleteMapping(path = "/{id}")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void delete(@PathVariable Long id) {
-		this.phoneService.delete(id);
-	}
-
+		@DeleteMapping(path = "/{id}")
+		@ResponseStatus(HttpStatus.NO_CONTENT)
+		public void delete(@PathVariable Long id) {
+			this.contactService.delete(id);
+		}
 }
+	
+

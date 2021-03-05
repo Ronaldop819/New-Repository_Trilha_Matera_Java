@@ -3,7 +3,7 @@ package com.cb.input;
 import lombok.Data;
 
 @Data
-public class ContactDtoInlput {
+public class ContactDtoInput {
 
 	private String name;
 	private Long idAdress;

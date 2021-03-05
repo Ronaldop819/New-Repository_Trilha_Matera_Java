@@ -28,7 +28,7 @@ public class AdressConverter {
 		return adress;
 	}
 	
-	public AdressDtoOutput modelDto(Adress adress) {
+	public AdressDtoOutput modelToDto(Adress adress) {
 		AdressDtoOutput adressDtoOutput = new AdressDtoOutput();
 		adressDtoOutput.setStreet(adress.getStreet());
 		adressDtoOutput.setNumber(adress.getNumber());
