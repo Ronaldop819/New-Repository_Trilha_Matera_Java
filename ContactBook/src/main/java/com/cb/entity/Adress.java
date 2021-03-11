@@ -6,14 +6,31 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.cb.input.AdressDtoInput;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @EqualsAndHashCode(of = { "id" })
+@NoArgsConstructor
 @Entity
 public class Adress {
-
+	
+	public Adress(AdressDtoInput adressDtoInput) {
+		fillAdressFromDto(adressDtoInput);	
+	}
+	
+	public void fillAdressFromDto(AdressDtoInput adressDtoInput) {
+		this.setStreet(adressDtoInput.getStreet());
+		this.setNumber(adressDtoInput.getNumber());
+		this.setComplement(adressDtoInput.getComplement());
+		this.setCity(adressDtoInput.getCity());
+		this.setState(adressDtoInput.getState());
+		this.setZipCode(adressDtoInput.getZipCode());
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

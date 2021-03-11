@@ -29,7 +29,7 @@ public class ContactController {
 	
 	@GetMapping(produces = "application/json")
 	public List<ContactDtoOutput> get() {
-		return this.contactService.getALL();
+		return this.contactService.getAll();
 	}
 	
 	@GetMapping(path = "/{id}", produces = "application/json")

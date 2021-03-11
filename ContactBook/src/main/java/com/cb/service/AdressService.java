@@ -2,11 +2,11 @@ package com.cb.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cb.converter.AdressConverter;
 import com.cb.entity.Adress;
 import com.cb.input.AdressDtoInput;
 import com.cb.output.AdressDtoOutput;
@@ -17,34 +17,32 @@ public class AdressService {
 
 	@Autowired
 	private AdressRepository adressRepository;
-	
-	@Autowired
-	private AdressConverter adressConverter;
-	
+
 	
 	public AdressDtoOutput create(AdressDtoInput adressDtoInput) {
-		Adress adress = adressConverter.dtoToModel(adressDtoInput);
+		Adress adress = new Adress(adressDtoInput);
 		this.adressRepository.save(adress);
-		return this.adressConverter.modelToDto(adress);
+		return new AdressDtoOutput(adress);
 	}
 	
 	public AdressDtoOutput update(AdressDtoInput adressDtoInput, long id) {
 		Optional<Adress> adressOptional = this.adressRepository.findById(id);
 		Adress adress = adressOptional.get();
 		
-		this.adressConverter.dtoToModel(adressDtoInput, adress);
+		adress.fillAdressFromDto(adressDtoInput);
+		
 		this.adressRepository.save(adress);
-		return this.adressConverter.modelToDto(adress);
+		return new AdressDtoOutput(adress);
 	}
 	
 	public List<AdressDtoOutput> getAll(){
-		return this.adressConverter.modelToDto(this.adressRepository.findAll());
+		return this.adressRepository.findAll().stream().map(AdressDtoOutput::new).collect(Collectors.toList());
 	}
 	
 	public AdressDtoOutput get(Long id) {
 		Optional<Adress> adressOptional = this.adressRepository.findById(id);
 		Adress adress = adressOptional.get();
-		return this.adressConverter.modelToDto(adress);
+		return new AdressDtoOutput(adress);
 	}
 	
 	public void delete(Long id) {
