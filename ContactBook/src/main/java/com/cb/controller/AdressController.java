@@ -21,7 +21,7 @@ import com.cb.output.AdressDtoOutput;
 import com.cb.service.AdressService;
 
 @RestController
-@RequestMapping
+@RequestMapping("/adress")
 public class AdressController {
 
 	@Autowired

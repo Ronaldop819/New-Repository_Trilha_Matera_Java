@@ -1,4 +1,4 @@
-package com.cb.controller;
+package com.techtalents.agenda.controller;
 
 import java.util.List;
 
@@ -16,42 +16,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cb.input.PhoneDtoInput;
-import com.cb.output.PhoneDtoOutput;
-import com.cb.service.PhoneService;
+import com.techtalents.agenda.dto.input.ContatoDtoInput;
+import com.techtalents.agenda.dto.output.ContatoDtoOutput;
+import com.techtalents.agenda.service.ContatoService;
 
 @RestController
-@RequestMapping("/phone")
-public class PhoneController {
+@RequestMapping("/contato")
+public class ContatoController {
 
 	@Autowired
-	private PhoneService phoneService;
+	private ContatoService contatoService;
 
 	@GetMapping(produces = "application/json")
-	public List<PhoneDtoOutput> get() {
-		return this.phoneService.getAll();
+	public List<ContatoDtoOutput> get() {
+		return this.contatoService.getAll();
 	}
 
 	@GetMapping(path = "/{id}", produces = "application/json")
-	public PhoneDtoOutput get(@PathVariable Long id) {
-		return this.phoneService.get(id);
+	public ContatoDtoOutput get(@PathVariable Long id) {
+		return this.contatoService.get(id);
 	}
 
 	@PostMapping(consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public PhoneDtoOutput post(@Valid @RequestBody PhoneDtoInput phoneDtoInput) {
-		return this.phoneService.create(phoneDtoInput);
+	public ContatoDtoOutput post(@Valid @RequestBody ContatoDtoInput contatoDtoInput) {
+		return this.contatoService.create(contatoDtoInput);
 	}
 
 	@PutMapping(path = "/{id}", consumes = "application/json", produces = "application/json")
-	public PhoneDtoOutput put(@Valid @RequestBody PhoneDtoInput phoneDtoInput, @PathVariable Long id) {
-		return this.phoneService.update(phoneDtoInput, id);
+	public ContatoDtoOutput put(@Valid @RequestBody ContatoDtoInput contatoDtoInput, @PathVariable Long id) {
+		return this.contatoService.update(contatoDtoInput, id);
 	}
 
 	@DeleteMapping(path = "/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {
-		this.phoneService.delete(id);
+		this.contatoService.delete(id);
 	}
 
 }

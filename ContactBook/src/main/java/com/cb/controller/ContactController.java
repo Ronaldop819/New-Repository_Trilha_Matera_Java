@@ -21,7 +21,7 @@ import com.cb.output.ContactDtoOutput;
 import com.cb.service.ContactService;
 
 @RestController
-@RequestMapping("/contato")
+@RequestMapping("/contact")
 public class ContactController {
 
 	@Autowired

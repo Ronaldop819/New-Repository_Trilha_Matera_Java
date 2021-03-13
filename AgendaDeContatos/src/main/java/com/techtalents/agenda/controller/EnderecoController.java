@@ -1,4 +1,4 @@
-package com.cb.controller;
+package com.techtalents.agenda.controller;
 
 import java.util.List;
 
@@ -16,42 +16,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cb.input.PhoneDtoInput;
-import com.cb.output.PhoneDtoOutput;
-import com.cb.service.PhoneService;
+import com.techtalents.agenda.dto.input.EnderecoDtoInput;
+import com.techtalents.agenda.dto.output.EnderecoDtoOutput;
+import com.techtalents.agenda.service.EnderecoService;
 
 @RestController
-@RequestMapping("/phone")
-public class PhoneController {
+@RequestMapping("/endereco")
+public class EnderecoController {
 
 	@Autowired
-	private PhoneService phoneService;
+	private EnderecoService enderecoService;
 
 	@GetMapping(produces = "application/json")
-	public List<PhoneDtoOutput> get() {
-		return this.phoneService.getAll();
+	public List<EnderecoDtoOutput> get() {
+		return this.enderecoService.getAll();
 	}
 
 	@GetMapping(path = "/{id}", produces = "application/json")
-	public PhoneDtoOutput get(@PathVariable Long id) {
-		return this.phoneService.get(id);
+	public EnderecoDtoOutput get(@PathVariable Long id) {
+		return this.enderecoService.get(id);
 	}
 
 	@PostMapping(consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public PhoneDtoOutput post(@Valid @RequestBody PhoneDtoInput phoneDtoInput) {
-		return this.phoneService.create(phoneDtoInput);
+	public EnderecoDtoOutput post(@Valid @RequestBody EnderecoDtoInput enderecoDtoInput) {
+		return this.enderecoService.create(enderecoDtoInput);
 	}
 
 	@PutMapping(path = "/{id}", consumes = "application/json", produces = "application/json")
-	public PhoneDtoOutput put(@Valid @RequestBody PhoneDtoInput phoneDtoInput, @PathVariable Long id) {
-		return this.phoneService.update(phoneDtoInput, id);
+	public EnderecoDtoOutput put(@Valid @RequestBody EnderecoDtoInput enderecoDtoInput, @PathVariable Long id) {
+		return this.enderecoService.update(enderecoDtoInput, id);
 	}
 
 	@DeleteMapping(path = "/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {
-		this.phoneService.delete(id);
+		this.enderecoService.delete(id);
 	}
 
 }

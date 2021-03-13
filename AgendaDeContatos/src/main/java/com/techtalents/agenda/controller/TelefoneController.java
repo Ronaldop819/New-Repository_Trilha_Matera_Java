@@ -1,4 +1,4 @@
-package com.cb.controller;
+package com.techtalents.agenda.controller;
 
 import java.util.List;
 
@@ -16,42 +16,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cb.input.PhoneDtoInput;
-import com.cb.output.PhoneDtoOutput;
-import com.cb.service.PhoneService;
+import com.techtalents.agenda.dto.input.TelefoneDtoInput;
+import com.techtalents.agenda.dto.output.TelefoneDtoOutput;
+import com.techtalents.agenda.service.TelefoneService;
 
 @RestController
-@RequestMapping("/phone")
-public class PhoneController {
+@RequestMapping("/telefone")
+public class TelefoneController {
 
 	@Autowired
-	private PhoneService phoneService;
+	private TelefoneService telefoneService;
 
 	@GetMapping(produces = "application/json")
-	public List<PhoneDtoOutput> get() {
-		return this.phoneService.getAll();
+	public List<TelefoneDtoOutput> get() {
+		return this.telefoneService.getAll();
 	}
 
 	@GetMapping(path = "/{id}", produces = "application/json")
-	public PhoneDtoOutput get(@PathVariable Long id) {
-		return this.phoneService.get(id);
+	public TelefoneDtoOutput get(@PathVariable Long id) {
+		return this.telefoneService.get(id);
 	}
 
 	@PostMapping(consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public PhoneDtoOutput post(@Valid @RequestBody PhoneDtoInput phoneDtoInput) {
-		return this.phoneService.create(phoneDtoInput);
+	public TelefoneDtoOutput post(@Valid @RequestBody TelefoneDtoInput telefoneDtoInput) {
+		return this.telefoneService.create(telefoneDtoInput);
 	}
 
 	@PutMapping(path = "/{id}", consumes = "application/json", produces = "application/json")
-	public PhoneDtoOutput put(@Valid @RequestBody PhoneDtoInput phoneDtoInput, @PathVariable Long id) {
-		return this.phoneService.update(phoneDtoInput, id);
+	public TelefoneDtoOutput put(@Valid @RequestBody TelefoneDtoInput telefoneDtoInput, @PathVariable Long id) {
+		return this.telefoneService.update(telefoneDtoInput, id);
 	}
 
 	@DeleteMapping(path = "/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {
-		this.phoneService.delete(id);
+		this.telefoneService.delete(id);
 	}
 
 }
