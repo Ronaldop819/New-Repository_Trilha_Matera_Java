@@ -32,6 +32,7 @@ public class Phone {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String type;
 	
 	@Column(nullable = false, length = 3)
